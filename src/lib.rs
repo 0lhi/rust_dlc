@@ -7,6 +7,11 @@ pub fn is_not_alphabetic(c: char) -> bool {
     !c.is_alphabetic()
 }
 
+/// Experimental, don't use yet, we'll add transliteration later!
+pub fn is_not_latin_char(l: char) -> bool {
+    !matches!(l, 'a'..='z' | 'A'..='Z')
+}
+
 /// Inverted from [is_numeric](char::is_numeric).
 pub fn is_not_digit(d: char) -> bool {
     !matches!(d, '0'..='9')
@@ -31,7 +36,7 @@ pub fn is_not_numeric(n: char) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
-    const STRONK: &str = "-9.7349üöäßgee5hr6wg465447";
+    const STRONK: &str = "-9.K73①4٣9üöä藏ßgee5hr6wg465447💯🇨🇲🇰🇰🚾0️⃣2️⃣9️⃣8️⃣7️⃣🅰️🆎🔤🆖㊙️🈺🈚️🈲";
     #[test]
     fn it_works() {
         let result = 2 + 2;
@@ -46,17 +51,29 @@ mod tests {
 
     #[test]
     fn test_is_not_digit() {
-        let number: i64 = STRONK
+        let digit: i64 = STRONK
             .replace(is_not_digit, "")
             .replace(char::is_alphabetic, "")
             .parse()
             .unwrap();
-        dbg!(number);
+        dbg!(digit);
     }
 
     #[test]
     fn test_is_not_alphabetic() {
         let letter = STRONK.replace(is_not_alphabetic, "");
         dbg!(letter);
+    }
+
+    #[test]
+    fn test_is_not_latin() {
+        let roman = STRONK.replace(is_not_latin_char, "");
+        dbg!(roman);
+    }
+
+    #[test]
+    fn test_is_not_numeric() {
+        let number = STRONK.replace(is_not_numeric, "");
+        dbg!(number);
     }
 }
