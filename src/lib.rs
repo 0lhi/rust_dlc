@@ -1,7 +1,7 @@
 pub fn add_numbers(number_one: i64, number_two: i64) -> i64 {
     number_one + number_two
 }
-
+// Test.
 #[cfg(test)]
 mod tests {
     use super::*;
