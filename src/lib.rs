@@ -1,10 +1,37 @@
 pub fn add_numbers(number_one: i64, number_two: i64) -> i64 {
     number_one + number_two
 }
-// Test.
+
+/// Inverted from [is_alphabetic](char::is_alphabetic).
+pub fn is_not_alphabetic(c: char) -> bool {
+    !c.is_alphabetic()
+}
+
+/// Inverted from [is_numeric](char::is_numeric).
+pub fn is_not_digit(d: char) -> bool {
+    !matches!(d, '0'..='9')
+}
+
+pub fn is_not_numeric(n: char) -> bool {
+    !n.is_numeric()
+}
+
+// Alternative approach to the same function using
+// `if else` instead of `match`. Leads to equivalent
+// Assembly output in Release, but not in Debug.
+//
+// pub fn is_not_digit(c: char) -> bool {
+//     if c >= '0' && c <= '9' {
+//         return false;
+//     } else {
+//         return true;
+//     }
+// }
+
 #[cfg(test)]
 mod tests {
     use super::*;
+    const STRONK: &str = "-9.7349üöäßgee5hr6wg465447";
     #[test]
     fn it_works() {
         let result = 2 + 2;
@@ -15,5 +42,21 @@ mod tests {
     fn test_add_numbers() {
         let result = add_numbers(2, 8);
         assert_eq!(result, 10);
+    }
+
+    #[test]
+    fn test_is_not_digit() {
+        let number: i64 = STRONK
+            .replace(is_not_digit, "")
+            .replace(char::is_alphabetic, "")
+            .parse()
+            .unwrap();
+        dbg!(number);
+    }
+
+    #[test]
+    fn test_is_not_alphabetic() {
+        let letter = STRONK.replace(is_not_alphabetic, "");
+        dbg!(letter);
     }
 }
