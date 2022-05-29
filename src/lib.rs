@@ -23,7 +23,7 @@ pub fn is_not_numeric(n: char) -> bool {
 
 /// Use for allowing Floating Points.
 pub fn is_not_float(n: char) -> bool {
-    !n.is_numeric() && (n == '.')
+    !n.is_numeric() && (n != '.')
 }
 
 // Alternative approach to the same function using
