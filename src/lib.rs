@@ -21,6 +21,11 @@ pub fn is_not_numeric(n: char) -> bool {
     !n.is_numeric()
 }
 
+/// Use for allowing Floating Points.
+pub fn is_not_float(n: char) -> bool {
+    !n.is_numeric() && (n == '.')
+}
+
 // Alternative approach to the same function using
 // `if else` instead of `match`. Leads to equivalent
 // Assembly output in Release, but not in Debug.
