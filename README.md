@@ -15,7 +15,7 @@ rdlc = { git = "https://github.com/0lhi/rust_dlc.git", package = "rust_dlc"}
 We have an ```input``` variable containing the String ```42.8 kg```. We want to get the number out of this and turn it into a floating point.
 
 ```rust
-let number: f64 = input.trim().replace(rdlc::is_not_float, "").trim().parse().unwrap();
+let number: f64 = input.trim().replace(|c: char| !rdlc::digital_scale(c) || c == ' ', "").trim().parse().unwrap();
 ```
 
 Now we have:

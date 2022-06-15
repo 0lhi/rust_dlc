@@ -93,4 +93,15 @@ mod tests {
         let unit = STRONK.replace(|c: char| !digital_scale(c) || c == ' ', "");
         dbg!(unit);
     }
+
+    #[test]
+    fn test_digital_scale_public() {
+        let number: f64 = "42.8 kg"
+            .trim()
+            .replace(|c: char| !digital_scale(c) || c == ' ', "")
+            .trim()
+            .parse()
+            .unwrap();
+        dbg!(number);
+    }
 }
