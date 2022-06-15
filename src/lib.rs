@@ -21,10 +21,14 @@ pub fn is_not_numeric(n: char) -> bool {
     !n.is_numeric()
 }
 
-/// Use for allowing Floating Points.
-pub fn is_not_float(n: char) -> bool {
-    !n.is_numeric() && (n != '.')
+/// For digits [0-9] and symbols [- and .] used by Digital Weight Scales.
+pub fn digital_scale(n: char) -> bool {
+    matches!(n, '0'..='9') || (n == '.') || (n == '-')
 }
+
+// pub fn is_digital_scale(n: char) -> bool {
+//     !n.is_not_digital_scale()
+// }
 
 // Alternative approach to the same function using
 // `if else` instead of `match`. Leads to equivalent
@@ -80,5 +84,13 @@ mod tests {
     fn test_is_not_numeric() {
         let number = STRONK.replace(is_not_numeric, "");
         dbg!(number);
+    }
+
+    #[test]
+    fn test_digital_scale() {
+        let number = STRONK.replace(digital_scale, "");
+        dbg!(number);
+        let unit = STRONK.replace(|c: char| !digital_scale(c) || c == ' ', "");
+        dbg!(unit);
     }
 }
