@@ -21,7 +21,7 @@ pub fn is_not_numeric(n: char) -> bool {
     !n.is_numeric()
 }
 
-/// For digits [0-9] and symbols [- and .] used by Digital Weight Scales.
+/// For digits and symbols used by Digital Weight Scales: "0"-"9", "." & "-".
 pub fn digital_scale(n: char) -> bool {
     matches!(n, '0'..='9') || (n == '.') || (n == '-')
 }
